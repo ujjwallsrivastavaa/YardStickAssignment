@@ -60,7 +60,7 @@ const BudgetPage = () => {
     fetcher
   );
 
-  const { data: categoryData, error: categoryError, isLoading: categoryIsLoading,mutate:categoryMutate } = useSWR<CategoryListResponse>(
+  const { data: categoryData } = useSWR<CategoryListResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/category`,
     fetcher
   );

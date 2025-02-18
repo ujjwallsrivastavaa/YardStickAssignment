@@ -5,16 +5,18 @@ import { getTransactionColumns } from "./TransactionColumns";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Category, Transaction } from "@/types";
 import { useMemo } from "react";
+
 interface TransactionsTableProps {
   transactions: Transaction[];
- mutate: () => void;  
- categories : Category[];
+  mutate: () => void;  
+  categories: Category[];
 }
 
-const TransactionsTable: React.FC<TransactionsTableProps> = ({ transactions,mutate,categories }) => {
+const TransactionsTable: React.FC<TransactionsTableProps> = ({ transactions, mutate, categories }) => {
+  // Removed unused variables and fixed the dependency array
   const columns = useMemo(
-    () => getTransactionColumns(mutate,categories),
-    [mutate] 
+    () => getTransactionColumns(mutate, categories),
+    [mutate, categories] // Adding `categories` to dependencies
   );
 
   const table = useReactTable({
