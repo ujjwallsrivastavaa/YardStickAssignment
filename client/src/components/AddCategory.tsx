@@ -42,7 +42,7 @@ const AddCategory :React.FC<AddCategoryProps>= ({mutate}) => {
       name: "",
     },
   });
-
+//
   
   const onSubmit = async(values:z.infer<typeof formSchema>) => {
     setIsSaving(true);
