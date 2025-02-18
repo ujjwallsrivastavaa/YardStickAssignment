@@ -95,7 +95,7 @@ dbURL=<Your MongoDB URL>
 Run the following command to start the server:
 
 ```sh
-npm start
+npm run dev
 ```
 
 The server will typically run on: http://localhost:5001
