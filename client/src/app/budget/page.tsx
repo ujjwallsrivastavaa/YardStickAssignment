@@ -82,7 +82,7 @@ const BudgetPage = () => {
     },
     {} as Record<string, string>
   );
-
+  //
   // Prepare data for the stacked bar chart
   const chartData =
     data?.data.monthsData
