@@ -7,16 +7,8 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { BarChart, CreditCard, Home, PieChart, Wallet } from "lucide-react";
+import {  CreditCard, Home, Wallet } from "lucide-react";
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-} from "@/components/ui/sidebar";
 const Header = () => {
   const menuItems = [
     { title: "Dashboard", icon: Home, href: "/" },

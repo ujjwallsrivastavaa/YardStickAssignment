@@ -113,7 +113,7 @@ const TransactionColumnAction: React.FC<TransactionColumnsActionProps> = ({
           <DialogHeader>
             <DialogTitle>Edit Transaction</DialogTitle>
             <DialogDescription>
-              Update details for "{data.description}"
+            Update details for &quot;{data.description}&quot;
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>

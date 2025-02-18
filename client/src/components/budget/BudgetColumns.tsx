@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Budget, Category, Transaction } from "@/types";
+import { Budget, Category } from "@/types";
 import BudgetColumnActions from "./BudgetColumnActions";
 
 

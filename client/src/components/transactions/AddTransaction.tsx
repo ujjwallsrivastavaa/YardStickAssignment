@@ -21,7 +21,7 @@ import {
 import React, { useState } from "react";
 import { Loader2, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Category, Transaction } from "@/types";
+import { Category } from "@/types";
 import { Input } from "../ui/input";
 
 import { Calendar } from "@/components/ui/calendar";
@@ -84,8 +84,7 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ mutate }) => {
 
   const {
     data: categoryData,
-    error: categoryError,
-    isLoading: categoryIsLoading,
+
   } = useSWR<CategoryListResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/category`,
     fetcher

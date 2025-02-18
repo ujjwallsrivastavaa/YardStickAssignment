@@ -62,9 +62,7 @@ export default function Home() {
 
   const {
     data: categoryData,
-    error: categoryError,
-    isLoading: categoryIsLoading,
-    mutate: categoryMutate,
+    mutate: categoryMutate
   } = useSWR<CategoryListResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/category`,
     fetcher
@@ -89,7 +87,7 @@ export default function Home() {
   const chartData =
     data?.data.monthsData
       .map((monthItem) => {
-        const monthData: Record<string, any> = { month: monthItem.month };
+        const monthData: Record<string,  number | string> = { month: monthItem.month };
 
         monthItem.categories.forEach((category) => {
           monthData[`Transaction - ${category.name}`] =
@@ -117,9 +115,9 @@ export default function Home() {
               Overview of your financial transactions, budgets, and categories.
             </CardDescription>
             <div className="flex gap-2 flex-wrap">
-              <AddTransaction />
-              <AddBudget />
-              <AddCategory />
+              <AddTransaction mutate={mutate}/>
+              <AddBudget mutate={mutate} />
+              <AddCategory mutate={categoryMutate}/>
             </div>
           </div>
           <div className="flex items-center flex-wrap"></div>

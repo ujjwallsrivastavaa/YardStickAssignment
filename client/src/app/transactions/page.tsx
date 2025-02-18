@@ -8,9 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import useSWR, { useSWRConfig } from "swr";
+import useSWR from "swr";
 import { useDebounce } from "use-debounce";
 import { Search } from "lucide-react";
 import TransactionsTable from "@/components/transactions/TransactionTable";
@@ -41,7 +41,7 @@ const TransactionsList = () => {
   const [debouncedSearch] = useDebounce(search, 500);
   const [category, setCategory] = useState<string>("");
   const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(10);
+  const limit = 10;
   const { data, error, isLoading, mutate } = useSWR<TransactionListResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/transactions-list?search=${debouncedSearch}&category=${category}&page=${page}&limit=${limit}`,
     fetcher

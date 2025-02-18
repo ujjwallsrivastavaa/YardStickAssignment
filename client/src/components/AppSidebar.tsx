@@ -1,11 +1,9 @@
 "use client"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { BarChart, CreditCard, Home, PieChart, Wallet } from "lucide-react"
+import {  CreditCard, Home, Wallet } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
@@ -28,7 +26,7 @@ export default function  AppSidebar () {
     <Sidebar className="mt-20 px-1 hidden lg:flex bg-white">
       <SidebarContent className="bg-white scroll-width flex gap-2">
         {
-          menuItems.map((item, index) => (
+          menuItems.map((item) => (
             <SidebarMenu key={item.title} >
             <SidebarMenuItem>
               <SidebarMenuButton

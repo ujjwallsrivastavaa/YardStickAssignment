@@ -49,23 +49,21 @@ type BudgetResponse = {
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
-// Function to generate random colors
 const getRandomColor = () => {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 };
 
 const BudgetPage = () => {
-  const { data, error, isLoading, mutate } = useSWR<BudgetResponse>(
+  const { data, error, isLoading,mutate } = useSWR<BudgetResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/budget`,
     fetcher
   );
 
-  const { data: categoryData } = useSWR<CategoryListResponse>(
+  const { data: categoryData, } = useSWR<CategoryListResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/category`,
     fetcher
   );
 
-  // Extract all unique categories dynamically
   const uniqueCategories = Array.from(
     new Set(
       data?.data.monthsData.flatMap((month) =>
@@ -74,7 +72,7 @@ const BudgetPage = () => {
     )
   );
 
-  // Assign a random color to each category
+
   const categoryColors: Record<string, string> = uniqueCategories.reduce(
     (acc, category) => {
       acc[category] = getRandomColor();
@@ -82,22 +80,21 @@ const BudgetPage = () => {
     },
     {} as Record<string, string>
   );
-  //
-  // Prepare data for the stacked bar chart
+
+
   const chartData =
-    data?.data.monthsData
-      .map((monthItem) => {
-        const monthData: Record<string, any> = { month: monthItem.month };
+  data?.data.monthsData
+    .map((monthItem) => {
+      const monthData: Record<string, number | string> = { month: monthItem.month };
 
-        monthItem.categories.forEach((category) => {
-          monthData[`Transaction - ${category.name}`] =
-            category.transactionAmount;
-          monthData[`Budget - ${category.name}`] = category.budgetAmount;
-        });
+      monthItem.categories.forEach((category) => {
+        monthData[`Transaction - ${category.name}`] = category.transactionAmount;
+        monthData[`Budget - ${category.name}`] = category.budgetAmount;
+      });
 
-        return monthData;
-      })
-      .reverse() || []; // Reverse for latest month first
+      return monthData;
+    })
+    .reverse() || []; // Reverse for latest month first
 
   const latestMonth = data?.data.monthsData[0]; // Assuming latest month is at index 0
   const pieChartData =
@@ -132,7 +129,6 @@ const BudgetPage = () => {
             </p>
           ) : (
             <>
-              {/* Pie Chart for Latest Month */}
               {latestMonth && (
                 <>
                   <h2 className="text-2xl font-semibold text-center mt-8">
@@ -168,7 +164,6 @@ const BudgetPage = () => {
                 </>
               )}
 
-              {/* Bar Chart for Budget vs Transaction */}
               <h2 className="text-2xl font-semibold text-center mt-12">
                 Budget vs Actual Spending
               </h2>
@@ -182,7 +177,6 @@ const BudgetPage = () => {
                   <Tooltip />
                   <Legend />
 
-                  {/* Stacked Bars for Transactions */}
                   {uniqueCategories.map((category) => (
                     <Bar
                       key={`Transaction - ${category}`}
@@ -192,7 +186,6 @@ const BudgetPage = () => {
                     />
                   ))}
 
-                  {/* Stacked Bars for Budgets */}
                   {uniqueCategories.map((category) => (
                     <Bar
                       key={`Budget - ${category}`}
@@ -217,22 +210,25 @@ const BudgetPage = () => {
               spending.
             </CardDescription>
             <div className='flex gap-2 flex-wrap'>
-              <AddBudget mutate={mutate} /> 
+            <AddBudget mutate={mutate} /> 
             </div>
+          </div>
+          <div className="flex items-center flex-wrap">
+
           </div>
         </CardHeader>
         <CardContent>
-          {isLoading ? (
-            <TableSkeleton />
-          ) : error ? (
-            <p className="text-red-500 text-center py-4">Failed to load transactions.</p>
-          ) : (
-            <BudgetTable
-              budget={data?.data.budgetData ?? []}
-              mutate={mutate}
-              categories={categoryData?.categories ?? []}
-            />
-          )}
+        {isLoading ? (
+          <TableSkeleton />
+        ) : error ? (
+          <p className="text-red-500 text-center py-4">Failed to load transactions.</p>
+        ) : (
+          
+          <BudgetTable budget={data?.data.budgetData ?? []} mutate = {mutate} categories={categoryData?.categories ?? []} />
+     
+
+        )}
+
         </CardContent>
       </Card>
     </>
