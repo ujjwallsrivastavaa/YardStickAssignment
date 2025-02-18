@@ -47,7 +47,7 @@ const AddCategory :React.FC<AddCategoryProps>= ({mutate}) => {
   const onSubmit = async(values:z.infer<typeof formSchema>) => {
     setIsSaving(true);
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/transaction`, {
+      await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/category`, {
         ...values,
       });
       mutate?.();
