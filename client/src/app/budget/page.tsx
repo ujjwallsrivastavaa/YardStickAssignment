@@ -24,7 +24,6 @@ import axios from "axios";
 import { Budget, Category } from "@/types";
 import TableSkeleton from "@/components/loading/TableSkeleton";
 import BudgetTable from "@/components/budget/BudgetTable";
-import AddCategory from "@/components/AddCategory";
 import AddBudget from "@/components/budget/AddBudget";
 
 type CategoryData = {
