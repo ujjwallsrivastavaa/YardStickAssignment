@@ -55,7 +55,7 @@ const getRandomColor = () => {
 };
 
 const BudgetPage = () => {
-  const { data, error, isLoading,mutate } = useSWR<BudgetResponse>(
+  const { data, error, isLoading, mutate } = useSWR<BudgetResponse>(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/budget`,
     fetcher
   );
@@ -217,25 +217,22 @@ const BudgetPage = () => {
               spending.
             </CardDescription>
             <div className='flex gap-2 flex-wrap'>
-            <AddBudget mutate={mutate} /> 
+              <AddBudget mutate={mutate} /> 
             </div>
-          </div>
-          <div className="flex items-center flex-wrap">
-
           </div>
         </CardHeader>
         <CardContent>
-        {isLoading ? (
-          <TableSkeleton />
-        ) : error ? (
-          <p className="text-red-500 text-center py-4">Failed to load transactions.</p>
-        ) : (
-          
-          <BudgetTable budget={data?.data.budgetData ?? []} mutate = {mutate} categories={categoryData?.categories ?? []} />
-     
-
-        )}
-
+          {isLoading ? (
+            <TableSkeleton />
+          ) : error ? (
+            <p className="text-red-500 text-center py-4">Failed to load transactions.</p>
+          ) : (
+            <BudgetTable
+              budget={data?.data.budgetData ?? []}
+              mutate={mutate}
+              categories={categoryData?.categories ?? []}
+            />
+          )}
         </CardContent>
       </Card>
     </>
